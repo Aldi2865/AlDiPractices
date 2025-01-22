@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Edit Ammunition{% endblock %}
+{% block content %}
+<form method="post">
+    <div>
+        <label for="type">Type:</label><br>
+        <input type="text" name="type" id="type" value="{{ ammunition[1] }}" required><br>
+    </div>
+    <div>
+        <label for="quantity">Quantity:</label><br>
+        <input type="number" name="quantity" id="quantity" value="{{ ammunition[2] }}" required><br>
+    </div>
+    <div>
+        <label for="storage_location">Storage Location:</label><br>
+        <input type="text" name="storage_location" id="storage_location" value="{{ ammunition[3] }}" required><br>
+    </div>
+    <div>
+        <label for="expiration_date">Expiration Date:</label><br>
+        <input type="date" name="expiration_date" id="expiration_date" value="{{ ammunition[4] }}" required><br>
+    </div>
+    <div>
+        <input type="submit" value="Submit">
+    </div>
+</form>
+{% endblock %}

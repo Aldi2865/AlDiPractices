@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Create Ammunition{% endblock %}
+{% block content %}
+<form method="post">
+    <div>
+        <label for="type">Type:</label><br>
+        <input type="text" name="type" id="type" value="{{ request.form.get('type', '') }}" required><br>
+    </div>
+    <div>
+        <label for="quantity">Quantity:</label><br>
+        <input type="number" name="quantity" id="quantity" value="{{ request.form.get('quantity', '') }}" required><br>
+    </div>
+    <div>
+        <label for="storage_location">Storage Location:</label><br>
+        <input type="text" name="storage_location" id="storage_location" value="{{ request.form.get('storage_location', '') }}" required><br>
+    </div>
+    <div>
+        <label for="expiration_date">Expiration Date:</label><br>
+        <input type="date" name="expiration_date" id="expiration_date" value="{{ request.form.get('expiration_date', '') }}" required><br>
+    </div>
+    <div>
+        <input type="submit" value="Submit">
+    </div>
+</form>
+{% endblock %}

@@ -1,0 +1,5 @@
+#requirements.txt: Список залежностей Python для проекту.
+
+Flask
+psycopg2-binary
+Flask-WTF
