@@ -1,1 +1,1 @@
-# IT 2025 practices
+#IT 2025 practices
