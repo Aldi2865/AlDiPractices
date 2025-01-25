@@ -16,8 +16,8 @@
 
 **3.Створення Google Форми:**
 
-В каталозі *task_3_google_form* міститься файл *google_form.gs* із кодом Google Apps Script для роботи форми для збору даних. Посилання на робочу форму: [https://docs.google.com/forms/d/e/1FAIpQLSdkQ0SBw5JncLbo3gzFAY7iwi8HLBZrtAmhefJ3K_PargfFhQ/viewform](https://docs.google.com/forms/d/e/1FAIpQLSdkQ0SBw5JncLbo3gzFAY7iwi8HLBZrtAmhefJ3K_PargfFhQ/viewform)
+Цей репозиторій містить скрипти Google Apps Script, які автоматично створюють три типи Google Форм (базову інформаційну, розширену інформаційну з полем email та перевіркою, та форму опитування з одним питанням) і зберігають посилання на ці форми в Google Таблиці. Скрипти можна редагувати, щоб налаштувати форми під свої потреби. Для розширеної форми потрібен окремий аркуш з назвою "Відповіді".
 
 4.**Створення XML-файлу**:
 
-Каталог *task_4_xml_creation* містить файл  *xml_creator.py,* який створює XML-файл з даними про підрозділи *unit_data.xml*.
+Каталог *task_4_xml_creation* містить два скрипти Python для генерації XML-файлів: `xml_creator_units.py` створює файл `unit_data.xml` з даними про військові **підрозділи** (назва, кількість, статус), а `xml_creator_resources.py` створює файл `resource_data.xml` з даними про **ресурси** (назва, кількість, доступність).

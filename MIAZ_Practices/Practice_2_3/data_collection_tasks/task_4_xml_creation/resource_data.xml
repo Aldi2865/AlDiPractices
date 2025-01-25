@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<resource>
+		<name>
+			Communication Vehicle
+		</name>
+		<quantity>
+			10
+		</quantity>
+		<availability>
+			Available
+		</availability>
+	</resource>
+	<resource>
+		<name>
+			Armored Ambulance
+		</name>
+		<quantity>
+			5
+		</quantity>
+		<availability>
+			In Repair
+		</availability>
+	</resource>
+	<resource>
+		<name>
+			Transport Helicopter
+		</name>
+		<quantity>
+			2
+		</quantity>
+		<availability>
+			Available
+		</availability>
+	</resource>
+	<resource>
+		<name>
+			Communication Drone
+		</name>
+		<quantity>
+			8
+		</quantity>
+		<availability>
+			Available
+		</availability>
+	</resource>
+	<resource>
+		<name>
+			Armored Truck
+		</name>
+		<quantity>
+			3
+		</quantity>
+		<availability>
+			Maintenance
+		</availability>
+	</resource>
+	<resource>
+		<name>
+			Engineering Tank
+		</name>
+		<quantity>
+			15
+		</quantity>
+		<availability>
+			Available
+		</availability>
+	</resource>
+	<resource>
+		<name>
+			Transport Ambulance
+		</name>
+		<quantity>
+			7
+		</quantity>
+		<availability>
+			Available
+		</availability>
+	</resource>
+	<resource>
+		<name>
+			Heavy APC
+		</name>
+		<quantity>
+			1
+		</quantity>
+		<availability>
+			In Repair
+		</availability>
+	</resource>
+	<resource>
+		<name>
+			Heavy Truck
+		</name>
+		<quantity>
+			4
+		</quantity>
+		<availability>
+			Available
+		</availability>
+	</resource>
+	<resource>
+		<name>
+			Heavy Ambulance
+		</name>
+		<quantity>
+			6
+		</quantity>
+		<availability>
+			Available
+		</availability>
+	</resource>
+</resources>

@@ -1,2 +1,113 @@
-<?xml version='1.0' encoding='utf-8'?>
-<units><unit><name>Quebec Regiment</name><quantity>150</quantity><status>Active</status></unit><unit><name>Yankee Army</name><quantity>120</quantity><status>Standby</status></unit><unit><name>Delta Group</name><quantity>80</quantity><status>Active</status></unit><unit><name>Sierra Regiment</name><quantity>95</quantity><status>Training</status></unit><unit><name>Echo Battalion</name><quantity>110</quantity><status>Active</status></unit><unit><name>Quebec Company</name><quantity>60</quantity><status>Maintenance</status></unit><unit><name>Juliet Division</name><quantity>75</quantity><status>Active</status></unit><unit><name>Foxtrot Company</name><quantity>130</quantity><status>Standby</status></unit><unit><name>Foxtrot Battalion</name><quantity>90</quantity><status>Active</status></unit><unit><name>Romeo Division</name><quantity>100</quantity><status>Training</status></unit></units>
+<?xml version="1.0" encoding="utf-8"?>
+<units>
+	<unit>
+		<name>
+			Quebec Regiment
+		</name>
+		<quantity>
+			150
+		</quantity>
+		<status>
+			Active
+		</status>
+	</unit>
+	<unit>
+		<name>
+			Yankee Army
+		</name>
+		<quantity>
+			120
+		</quantity>
+		<status>
+			Standby
+		</status>
+	</unit>
+	<unit>
+		<name>
+			Delta Group
+		</name>
+		<quantity>
+			80
+		</quantity>
+		<status>
+			Active
+		</status>
+	</unit>
+	<unit>
+		<name>
+			Sierra Regiment
+		</name>
+		<quantity>
+			95
+		</quantity>
+		<status>
+			Training
+		</status>
+	</unit>
+	<unit>
+		<name>
+			Echo Battalion
+		</name>
+		<quantity>
+			110
+		</quantity>
+		<status>
+			Active
+		</status>
+	</unit>
+	<unit>
+		<name>
+			Quebec Company
+		</name>
+		<quantity>
+			60
+		</quantity>
+		<status>
+			Maintenance
+		</status>
+	</unit>
+	<unit>
+		<name>
+			Juliet Division
+		</name>
+		<quantity>
+			75
+		</quantity>
+		<status>
+			Active
+		</status>
+	</unit>
+	<unit>
+		<name>
+			Foxtrot Company
+		</name>
+		<quantity>
+			130
+		</quantity>
+		<status>
+			Standby
+		</status>
+	</unit>
+	<unit>
+		<name>
+			Foxtrot Battalion
+		</name>
+		<quantity>
+			90
+		</quantity>
+		<status>
+			Active
+		</status>
+	</unit>
+	<unit>
+		<name>
+			Romeo Division
+		</name>
+		<quantity>
+			100
+		</quantity>
+		<status>
+			Training
+		</status>
+	</unit>
+</units>
