@@ -16,10 +16,10 @@ function createInformationForm() {
       .setTitle('Ваша електронна пошта')
       .setRequired(true);
 
-    // Валідація електронної пошти (перевірка наявності "@")
+    // Валідація електронної пошти (розширена перевірка)
     var emailValidation = FormApp.createTextValidation()
       .setHelpText('Введіть дійсну електронну адресу.')
-      .requireTextMatchesPattern('.*@.*') // Використовуємо регулярний вираз для перевірки наявності "@"
+      .requireTextMatchesPattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$') // Покращений регулярний вираз для перевірки email
       .build();
     emailItem.setValidation(emailValidation);
 
@@ -45,7 +45,7 @@ function createInformationForm() {
     var formId = form.getId();
 
     // Отримуємо конкретний аркуш за його ім'ям
-    var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Відповіді'); 
+    var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Відповіді');
 
     // Перевірка наявності аркуша
     if (sheet == null) {
