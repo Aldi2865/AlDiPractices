@@ -1,0 +1,40 @@
+@startuml
+
+entity "Units" as Units {
+  * unit_id : INT <<PK>>
+  --
+  * unit_name : VARCHAR(255)
+  unit_location : VARCHAR(255)
+}
+
+entity "Operations" as Operations {
+  * operation_id : INT <<PK>>
+  --
+  * operation_name : VARCHAR(255)
+  start_date : DATE
+  end_date : DATE
+  operation_status : VARCHAR(50)
+}
+
+entity "Reports" as Reports {
+  * report_id : INT <<PK>>
+  --
+  * report_date : DATE
+  description : TEXT
+  operation_id : INT <<FK>>
+}
+
+entity "Units_Operations" as Units_Operations {
+  * unit_id : INT <<FK>>
+  * operation_id : INT <<FK>>
+  --
+  PRIMARY KEY (unit_id, operation_id)
+}
+
+' Зв'язки між сутностями
+Units }o--o{ Units_Operations : "participates in (M:N)"
+Operations }o--o{ Units_Operations : "involves (M:N)"
+Operations }|--o{ Reports : "generates (1:N)"
+Units ||.o{ Reports : "mentioned in (1:N)"
+
+@enduml
