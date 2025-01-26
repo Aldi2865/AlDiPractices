@@ -8,20 +8,35 @@
 ```
 
 operations_planning/
+
 ├── config.py                  # Конфігурація проекту (БД, шляхи)
+
 ├── create_database.py        # Створення БД та таблиць у PostgreSQL
+
 ├── populate_database.py       # Заповнення БД даними з файлу Excel
+
 ├── sql_queries.py           # SQL запити
+
 ├── results/                  # Папка для збереження результатів запитів (створюється автоматично)
+
 │   ├── query_1.txt
+
 │   ├── query_2.txt
+
 │   ├── ...
+
 │   └── query_20.txt
+
 ├── operations_data.xlsx      # Файл Excel з даними (створюється автоматично)
+
 ├── create_excel_data.py      # Створення файлу Excel з тестовими даними
+
 ├── run_all.py                # Запуск всіх скриптів
+
 ├── find_venv.py              # Модуль з функцією для пошуку віртуального середовища
+
 └── README.md                 # Цей файл
+
 
 ```
 
