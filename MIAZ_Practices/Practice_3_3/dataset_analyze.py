@@ -136,6 +136,47 @@ def analyze_data(commitments_df, allocations_df, output_dir):
         # Візуалізація даних
         print_and_write("\nВізуалізація даних:")
 
+        merged_data = merged_data.rename(columns={
+                'Total bilateral commitments($ billion)': 'Загальні двосторонні зобов\'язання ($ млрд)',
+                'Total bilateral allocations($ billion)': 'Загальні двосторонні асигнування ($ млрд)',
+                'EU member_commitments': 'Член ЄС (зобов\'язання)',
+                'EU member_allocations': 'Член ЄС (асигнування)',
+                'Financial commitments($ billion)': 'Фінансові зобов\'язання ($ млрд)',
+                'Humanitarian commitments($ billion)': 'Гуманітарні зобов\'язання ($ млрд)',
+                'Military commitments($ billion)': 'Військові зобов\'язання ($ млрд)',
+                'Share in EU commitments($ billion)': 'Частка у зобов\'язаннях ЄС ($ млрд)',
+                'Specific weapons and equipment($ billion)': 'Конкретна зброя та техніка ($ млрд)',
+                'Financial commitments with military purpose($ billion)': 'Фінансові зобов\'язання з військовою метою ($ млрд)',
+                'Total bilateral commitments of short term($ billion)': 'Загальні двосторонні короткострокові зобов\'язання ($ млрд)',
+                'GDP in 2021($ billion)': 'ВВП у 2021 році ($ млрд)',
+                'Financial allocations($ billion)': 'Фінансові асигнування ($ млрд)',
+                'Humanitarian allocations($ billion)': 'Гуманітарні асигнування ($ млрд)',
+                'Military allocations($ billion)': 'Військові асигнування ($ млрд)',
+                'Share in EU allocations($ billion)': 'Частка в асигнуваннях ЄС ($ млрд)'
+            })
+
+        commitments_df = commitments_df.rename(columns={
+            'Total bilateral commitments($ billion)': 'Загальні двосторонні зобов\'язання ($ млрд)',
+            'EU member': 'Член ЄС',
+            'Financial commitments($ billion)': 'Фінансові зобов\'язання ($ млрд)',
+            'Humanitarian commitments($ billion)': 'Гуманітарні зобов\'язання ($ млрд)',
+            'Military commitments($ billion)': 'Військові зобов\'язання ($ млрд)',
+            'Share in EU commitments($ billion)': 'Частка у зобов\'язаннях ЄС ($ млрд)',
+            'Specific weapons and equipment($ billion)': 'Конкретна зброя та техніка ($ млрд)',
+            'Financial commitments with military purpose($ billion)': 'Фінансові зобов\'язання з військовою метою ($ млрд)',
+            'Total bilateral commitments of short term($ billion)': 'Загальні двосторонні короткострокові зобов\'язання ($ млрд)',
+            'GDP in 2021($ billion)': 'ВВП у 2021 році ($ млрд)'
+        })
+
+        allocations_df = allocations_df.rename(columns={
+        'Total bilateral allocations($ billion)': 'Загальні двосторонні асигнування ($ млрд)',
+        'EU member': 'Член ЄС',
+        'Financial allocations($ billion)': 'Фінансові асигнування ($ млрд)',
+            'Humanitarian allocations($ billion)': 'Гуманітарні асигнування ($ млрд)',
+            'Military allocations($ billion)': 'Військові асигнування ($ млрд)',
+            'Share in EU allocations($ billion)': 'Частка в асигнуваннях ЄС ($ млрд)'
+        })
+
         # Гістограма для 'Total bilateral commitments($ billion)'
         plt.figure(figsize=(10, 6))
         sns.histplot(commitments_df['Загальні двосторонні зобов\'язання ($ млрд)'], bins=20, kde=True)
@@ -159,6 +200,7 @@ def analyze_data(commitments_df, allocations_df, output_dir):
         sns.boxplot(x='Член ЄС (зобов\'язання)', y='Загальні двосторонні зобов\'язання ($ млрд)', data=merged_data)
         plt.title('Загальні двосторонні зобов\'язання для країн-членів ЄС та інших країн')
         plt.xlabel('Член ЄС')
+        plt.xticks([0, 1], ['Ні', 'Так'])  # Замінюємо 0 і 1 на "Ні" і "Так"
         plt.ylabel('Загальні двосторонні зобов\'язання ($ млрд)')
         plt.savefig(os.path.join(output_dir, "boxplot_commitments_eu.png"))
         plt.show()
@@ -168,6 +210,7 @@ def analyze_data(commitments_df, allocations_df, output_dir):
         sns.boxplot(x='Член ЄС (асигнування)', y='Загальні двосторонні асигнування ($ млрд)', data=merged_data)
         plt.title('Загальні двосторонні асигнування для країн-членів ЄС та інших країн')
         plt.xlabel('Член ЄС')
+        plt.xticks([0, 1], ['Ні', 'Так'])  # Замінюємо 0 і 1 на "Ні" і "Так"
         plt.ylabel('Загальні двосторонні асигнування ($ млрд)')
         plt.savefig(os.path.join(output_dir, "boxplot_allocations_eu.png"))
         plt.show()
@@ -196,7 +239,7 @@ def analyze_data(commitments_df, allocations_df, output_dir):
         # Кореляційна матриця
         plt.figure(figsize=(12, 10))
         sns.heatmap(commitments_df.corr(numeric_only=True), annot=True, cmap='coolwarm', annot_kws={"fontsize": 8})
-        plt.title('Кореляційна матриця (Financial Commitments)')
+        plt.title('Кореляційна матриця (Фінансові зобов\'язання)')
         plt.xticks(fontsize=8, rotation=45, ha='right')
         plt.yticks(fontsize=8, rotation=0)
         plt.tight_layout()
@@ -205,7 +248,7 @@ def analyze_data(commitments_df, allocations_df, output_dir):
 
         plt.figure(figsize=(12, 10))
         sns.heatmap(allocations_df.corr(numeric_only=True), annot=True, cmap='coolwarm', annot_kws={"fontsize": 8})
-        plt.title('Кореляційна матриця (Financial Allocations)')
+        plt.title('Кореляційна матриця (Фінансові асигнування)')
         plt.xticks(fontsize=8, rotation=45, ha='right')
         plt.yticks(fontsize=8, rotation=0)
         plt.tight_layout()
