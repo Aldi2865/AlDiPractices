@@ -1,0 +1,21 @@
+-- Query 7:
+SELECT * FROM Operations_Staff WHERE Role = 'Coordinator';
+
+(4, 'Thomas Lee', 'Coordinator', 20, datetime.date(2025, 1, 6))
+(5, 'Tara White', 'Coordinator', 71, datetime.date(2025, 1, 12))
+(10, 'Sherry Burgess', 'Coordinator', 96, datetime.date(2025, 1, 21))
+(14, 'Shannon Mooney', 'Coordinator', 54, datetime.date(2025, 1, 7))
+(15, 'Kevin Hancock', 'Coordinator', 25, datetime.date(2025, 1, 9))
+(21, 'Ryan Mclaughlin', 'Coordinator', 11, datetime.date(2025, 1, 24))
+(23, 'Doris Oconnell', 'Coordinator', 46, datetime.date(2025, 1, 15))
+(28, 'Teresa Hammond', 'Coordinator', 42, datetime.date(2025, 1, 20))
+(32, 'Shirley Bennett', 'Coordinator', 45, datetime.date(2025, 1, 6))
+(36, 'James Butler', 'Coordinator', 26, datetime.date(2025, 1, 9))
+(37, 'Dominic Morales', 'Coordinator', 87, datetime.date(2025, 1, 21))
+(43, 'Raven Burns', 'Coordinator', 31, datetime.date(2025, 1, 15))
+(51, 'Antonio Martinez', 'Coordinator', 100, datetime.date(2025, 1, 14))
+(70, 'Denise Nguyen', 'Coordinator', 21, datetime.date(2025, 1, 6))
+(76, 'Abigail Collier', 'Coordinator', 68, datetime.date(2025, 1, 15))
+(85, 'Joseph Banks', 'Coordinator', 16, datetime.date(2025, 1, 12))
+(93, 'Kristie Davenport', 'Coordinator', 65, datetime.date(2025, 1, 24))
+(100, 'Amanda Francis', 'Coordinator', 2, datetime.date(2025, 1, 7))

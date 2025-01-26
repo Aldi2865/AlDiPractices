@@ -1,0 +1,6 @@
+-- Query 10:
+SELECT os.Name, os.Date_Assigned FROM Operations_Staff os JOIN Operations o ON os.Operation_ID = o.Operation_ID WHERE o.Operation_End_Date - o.Operation_Start_Date < 15;
+
+('Christine Harris', datetime.date(2025, 1, 18))
+('Scott Moore', datetime.date(2025, 1, 8))
+('Sharon Evans', datetime.date(2025, 1, 24))

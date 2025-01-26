@@ -1,0 +1,3 @@
+-- Query 20:
+SELECT os.Name, os.Role FROM Operations_Staff os JOIN Operations o ON os.Operation_ID = o.Operation_ID WHERE o.Operation_Name = 'Alpha'
+

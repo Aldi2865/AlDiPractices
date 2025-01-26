@@ -1,0 +1,4 @@
+-- Query 15:
+SELECT COUNT(DISTINCT Role) FROM Operations_Staff;
+
+(5,)

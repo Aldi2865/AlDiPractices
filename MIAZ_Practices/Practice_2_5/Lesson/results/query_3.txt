@@ -1,0 +1,2 @@
+(1, 'John Doe', 'Captain', 101, datetime.date(2024, 1, 10))
+(3, 'Mike Johnson', 'Sergeant', 101, datetime.date(2024, 1, 15))

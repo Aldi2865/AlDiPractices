@@ -1,0 +1,3 @@
+-- Query 4:
+SELECT * FROM Operations WHERE Commander = 'Maj. Winters';
+

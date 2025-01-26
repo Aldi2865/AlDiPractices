@@ -1,0 +1,5 @@
+-- Query 12:
+SELECT * FROM Operations_Staff WHERE Operation_ID = 2;
+
+(19, 'Darlene Graham', 'Analyst', 2, datetime.date(2025, 1, 15))
+(100, 'Amanda Francis', 'Coordinator', 2, datetime.date(2025, 1, 7))

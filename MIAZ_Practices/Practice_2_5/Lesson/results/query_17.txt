@@ -1,0 +1,2 @@
+('Advanced Tactics', 2)
+('Basic Combat', 2)

@@ -1,0 +1,4 @@
+-- Query 11:
+SELECT * FROM Operations ORDER BY (Operation_End_Date - Operation_Start_Date) DESC LIMIT 1;
+
+(62, 'Operation Positive', 'Capt. Sutton', datetime.date(2024, 12, 27), datetime.date(2025, 3, 22))

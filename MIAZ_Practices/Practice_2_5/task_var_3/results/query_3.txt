@@ -1,0 +1,4 @@
+-- Query 3:
+SELECT * FROM Operations_Staff WHERE Operation_ID = 1;
+
+(94, 'Teresa Massey', 'Medic', 1, datetime.date(2025, 1, 7))

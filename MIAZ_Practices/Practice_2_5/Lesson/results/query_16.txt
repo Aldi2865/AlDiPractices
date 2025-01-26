@@ -1,0 +1,5 @@
+('Anna Brown', 'Lieutenant')
+('Chris Green', 'Sergeant')
+('Jane Smith', 'Lieutenant')
+('John Doe', 'Captain')
+('Mike Johnson', 'Sergeant')

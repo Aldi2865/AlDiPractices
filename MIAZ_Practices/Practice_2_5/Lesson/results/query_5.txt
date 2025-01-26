@@ -1,0 +1,5 @@
+('John Doe', 'Captain', 'Basic Combat')
+('Jane Smith', 'Lieutenant', 'Advanced Tactics')
+('Mike Johnson', 'Sergeant', 'Basic Combat')
+('Anna Brown', 'Lieutenant', 'Medical Aid')
+('Chris Green', 'Sergeant', 'Advanced Tactics')

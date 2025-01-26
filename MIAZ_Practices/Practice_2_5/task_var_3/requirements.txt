@@ -1,0 +1,6 @@
+xlsxwriter
+psycopg2
+Faker
+subprocess
+sys
+os

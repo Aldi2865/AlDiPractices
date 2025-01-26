@@ -1,0 +1,4 @@
+-- Query 6:
+SELECT AVG(Operation_End_Date - Operation_Start_Date) FROM Operations;
+
+(Decimal('43.9600000000000000'),)

@@ -1,0 +1,4 @@
+-- Query 18:
+SELECT MIN(Operation_Start_Date) FROM Operations
+
+(datetime.date(2024, 12, 27),)
