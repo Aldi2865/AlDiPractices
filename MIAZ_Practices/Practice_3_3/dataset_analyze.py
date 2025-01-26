@@ -42,8 +42,7 @@ def analyze_data(commitments_df, allocations_df, output_dir):
     print("\nПропущені значення в 'Financial Allocations.csv':")
     print(allocations_df.isnull().sum())
 
-    # нічого видаляти не потрібно, оскільки країни могли не декларувати допомогу, або не виконати зобов'язання або у нас немає даних
-    # # Заповнення пропущених значень середнім значенням
+    # Заповнення пропущених значень середнім значенням (закоментовано)
     # for column in commitments_df.columns:
     #     if commitments_df[column].isnull().any():
     #         if pd.api.types.is_numeric_dtype(commitments_df[column]):
@@ -58,9 +57,9 @@ def analyze_data(commitments_df, allocations_df, output_dir):
     #         else:
     #             print(f"Пропуски в нечисловому стовпці '{column}' в 'Financial Allocations.csv' не замінено.")
 
-    # # Видалення дублікатів
-    # commitments_df.drop_duplicates(inplace=True)
-    # allocations_df.drop_duplicates(inplace=True)
+    # Видалення дублікатів
+    commitments_df.drop_duplicates(inplace=True)
+    allocations_df.drop_duplicates(inplace=True)
 
     # Перетворення категоріальних змінних на числові (якщо потрібно)
     if 'EU member' in commitments_df.columns:
@@ -71,9 +70,6 @@ def analyze_data(commitments_df, allocations_df, output_dir):
 
     # Об'єднуємо дані по країні
     merged_data = pd.merge(commitments_df, allocations_df, on="Country", suffixes=('_commitments', '_allocations'))
-
-    # Створюємо папку для збереження результатів, якщо її немає
-    os.makedirs(output_dir, exist_ok=True)
 
     # Відкриваємо файл для запису результатів
     with open(os.path.join(output_dir, "analysis_results.txt"), "w") as f:
@@ -109,25 +105,40 @@ def analyze_data(commitments_df, allocations_df, output_dir):
         print_and_write(allocations_df.sort_values(by="Total bilateral allocations($ billion)", ascending=False).head(5)[['Country', "Total bilateral allocations($ billion)"]])
 
         print_and_write("\nСереднє співвідношення між виділеними коштами та зобов'язаннями для країн-членів ЄС (після обробки):")
-        eu_commitments = commitments_df[commitments_df['EU member'] == 1]
-        eu_allocations = allocations_df[allocations_df['EU member'] == 1]
 
-        if not eu_commitments.empty and not eu_allocations.empty:
-            merged_data = pd.merge(eu_commitments, eu_allocations, on="Country", suffixes=('_commitments', '_allocations'))
-            merged_data['Allocation_to_Commitment_Ratio'] = merged_data["Total bilateral allocations($ billion)"] / merged_data["Total bilateral commitments($ billion)"]
-            print_and_write(merged_data['Allocation_to_Commitment_Ratio'].mean())
+        # Розрахунок співвідношення для всіх країн
+        merged_data['Allocation_to_Commitment_Ratio'] = merged_data["Total bilateral allocations($ billion)"] / merged_data["Total bilateral commitments($ billion)"]
 
-            # Додаємо стовпець 'EU member' до merged_data
-            merged_data['EU member'] = 1
-        else:
-            print_and_write("Недостатньо даних для розрахунку середнього співвідношення для країн-членів ЄС.")
+        # Виводимо середнє для ЄС
+        eu_mean_ratio = merged_data[merged_data['EU member_commitments'] == 1]['Allocation_to_Commitment_Ratio'].mean()
+        print_and_write(f"Середнє для країн ЄС: {eu_mean_ratio}")
+
+        # Виводимо середнє для не-ЄС
+        non_eu_mean_ratio = merged_data[merged_data['EU member_commitments'] == 0]['Allocation_to_Commitment_Ratio'].mean()
+        print_and_write(f"Середнє для країн не-ЄС: {non_eu_mean_ratio}")
+
+        # Замінюємо англійські назви колонок на українські для відображення на графіках
+        merged_data = merged_data.rename(columns={
+            'Total bilateral commitments($ billion)': 'Загальні двосторонні зобов\'язання ($ млрд)',
+            'Total bilateral allocations($ billion)': 'Загальні двосторонні асигнування ($ млрд)',
+            'EU member_commitments': 'Член ЄС (зобов\'язання)',
+            'EU member_allocations': 'Член ЄС (асигнування)'
+        })
+
+        commitments_df = commitments_df.rename(columns={
+            'Total bilateral commitments($ billion)': 'Загальні двосторонні зобов\'язання ($ млрд)'
+        })
+
+        allocations_df = allocations_df.rename(columns={
+          'Total bilateral allocations($ billion)': 'Загальні двосторонні асигнування ($ млрд)'
+        })
 
         # Візуалізація даних
         print_and_write("\nВізуалізація даних:")
 
         # Гістограма для 'Total bilateral commitments($ billion)'
         plt.figure(figsize=(10, 6))
-        sns.histplot(commitments_df['Total bilateral commitments($ billion)'], bins=20, kde=True)
+        sns.histplot(commitments_df['Загальні двосторонні зобов\'язання ($ млрд)'], bins=20, kde=True)
         plt.title('Розподіл загальних двосторонніх зобов\'язань')
         plt.xlabel('Загальні двосторонні зобов\'язання ($ млрд)')
         plt.ylabel('Кількість країн')
@@ -136,7 +147,7 @@ def analyze_data(commitments_df, allocations_df, output_dir):
 
         # Гістограма для 'Total bilateral allocations($ billion)'
         plt.figure(figsize=(10, 6))
-        sns.histplot(allocations_df['Total bilateral allocations($ billion)'], bins=20, kde=True)
+        sns.histplot(allocations_df['Загальні двосторонні асигнування ($ млрд)'], bins=20, kde=True)
         plt.title('Розподіл загальних двосторонніх асигнувань')
         plt.xlabel('Загальні двосторонні асигнування ($ млрд)')
         plt.ylabel('Кількість країн')
@@ -145,16 +156,16 @@ def analyze_data(commitments_df, allocations_df, output_dir):
 
         # Коробковий діаграма (boxplot) для 'Total bilateral commitments($ billion)' за групами 'EU member'
         plt.figure(figsize=(8, 6))
-        sns.boxplot(x='EU member', y='Total bilateral commitments($ billion)', data=commitments_df)
+        sns.boxplot(x='Член ЄС (зобов\'язання)', y='Загальні двосторонні зобов\'язання ($ млрд)', data=merged_data)
         plt.title('Загальні двосторонні зобов\'язання для країн-членів ЄС та інших країн')
         plt.xlabel('Член ЄС')
         plt.ylabel('Загальні двосторонні зобов\'язання ($ млрд)')
         plt.savefig(os.path.join(output_dir, "boxplot_commitments_eu.png"))
         plt.show()
 
-        # Коробкова діаграма (boxplot) для 'Total bilateral allocations($ billion)' за групами 'EU member'
+        # Коробковий діаграма (boxplot) для 'Total bilateral allocations($ billion)' за групами 'EU member'
         plt.figure(figsize=(8, 6))
-        sns.boxplot(x='EU member', y='Total bilateral allocations($ billion)', data=allocations_df)
+        sns.boxplot(x='Член ЄС (асигнування)', y='Загальні двосторонні асигнування ($ млрд)', data=merged_data)
         plt.title('Загальні двосторонні асигнування для країн-членів ЄС та інших країн')
         plt.xlabel('Член ЄС')
         plt.ylabel('Загальні двосторонні асигнування ($ млрд)')
@@ -163,10 +174,22 @@ def analyze_data(commitments_df, allocations_df, output_dir):
 
         # Діаграма розсіювання для 'Total bilateral commitments($ billion)' vs 'Total bilateral allocations($ billion)'
         plt.figure(figsize=(10, 6))
-        sns.scatterplot(x='Total bilateral commitments($ billion)', y='Total bilateral allocations($ billion)', data=merged_data, hue='EU member')
+        # Створюємо словник для заміни значень в легенді
+        legend_dict = {1: "Так", 0: "Ні"}
+
+        sns.scatterplot(x='Загальні двосторонні зобов\'язання ($ млрд)', y='Загальні двосторонні асигнування ($ млрд)',
+                        data=merged_data, hue='Член ЄС (зобов\'язання)', palette={0: 'skyblue', 1: 'lightgreen'})
+
         plt.title('Залежність між загальними зобов\'язаннями та асигнуваннями')
         plt.xlabel('Загальні двосторонні зобов\'язання ($ млрд)')
         plt.ylabel('Загальні двосторонні асигнування ($ млрд)')
+
+        # Отримуємо поточні мітки легенди
+        handles, labels = plt.gca().get_legend_handles_labels()
+
+        # Замінюємо мітки легенди, використовуючи словник
+        plt.legend(handles=handles, labels=[legend_dict.get(int(label), label) for label in labels], title='Член ЄС')
+
         plt.savefig(os.path.join(output_dir, "scatterplot_commitments_allocations.png"))
         plt.show()
 
@@ -174,8 +197,8 @@ def analyze_data(commitments_df, allocations_df, output_dir):
         plt.figure(figsize=(12, 10))
         sns.heatmap(commitments_df.corr(numeric_only=True), annot=True, cmap='coolwarm', annot_kws={"fontsize": 8})
         plt.title('Кореляційна матриця (Financial Commitments)')
-        plt.xticks(fontsize=8)
-        plt.yticks(fontsize=8)
+        plt.xticks(fontsize=8, rotation=45, ha='right')
+        plt.yticks(fontsize=8, rotation=0)
         plt.tight_layout()
         plt.savefig(os.path.join(output_dir, "correlation_matrix_commitments.png"))
         plt.show()
@@ -183,8 +206,8 @@ def analyze_data(commitments_df, allocations_df, output_dir):
         plt.figure(figsize=(12, 10))
         sns.heatmap(allocations_df.corr(numeric_only=True), annot=True, cmap='coolwarm', annot_kws={"fontsize": 8})
         plt.title('Кореляційна матриця (Financial Allocations)')
-        plt.xticks(fontsize=8)
-        plt.yticks(fontsize=8)
+        plt.xticks(fontsize=8, rotation=45, ha='right')
+        plt.yticks(fontsize=8, rotation=0)
         plt.tight_layout()
         plt.savefig(os.path.join(output_dir, "correlation_matrix_allocations.png"))
         plt.show()
@@ -193,15 +216,33 @@ def analyze_data(commitments_df, allocations_df, output_dir):
         plt.figure(figsize=(14, 8))
 
         # Створюємо DataFrame для візуалізації
-        plot_data = merged_data[['Country', 'Total bilateral commitments($ billion)', 'Total bilateral allocations($ billion)']]
-        plot_data = plot_data.melt(id_vars='Country', var_name='Type', value_name='Amount')
+        plot_data = merged_data[['Country', 'Загальні двосторонні зобов\'язання ($ млрд)', 'Загальні двосторонні асигнування ($ млрд)', 'Член ЄС (зобов\'язання)']]
+        plot_data = plot_data.melt(id_vars=['Country', 'Член ЄС (зобов\'язання)'], var_name='Type', value_name='Amount')
 
-        sns.barplot(x='Country', y='Amount', hue='Type', data=plot_data)
-        plt.title('Порівняння зобов\'язань та асигнувань по країнах')
+        # Замінюємо англійські назви на українські перед побудовою графіка
+        plot_data['Type'] = plot_data['Type'].replace({
+            'Загальні двосторонні зобов\'язання ($ млрд)': 'Загальні двосторонні зобов\'язання',
+            'Загальні двосторонні асигнування ($ млрд)': 'Загальні двосторонні асигнування'
+        })
+
+        sns.barplot(x='Country', y='Amount', hue='Type', data=plot_data, palette=['skyblue', 'lightgreen'])
+
+        # Додаємо легенду для 'EU member'
+        for i, patch in enumerate(plt.gca().patches):
+            if i < len(merged_data):
+                if merged_data['Член ЄС (зобов\'язання)'].iloc[i] == 1:
+                    patch.set_hatch('/')
+
+        # показуємо легенду
+        handles, labels = plt.gca().get_legend_handles_labels()
+        handles.append(plt.Rectangle((0,0),1,1, fc="white",ec="black",hatch='/'))
+        labels.append("Член ЄС")
+        plt.legend(handles, labels, title='Тип / Членство в ЄС')
+
+        plt.title('Порівняння зобов\'язань та асигнувань по країнах (з виділенням країн ЄС)')
         plt.xlabel('Країна')
         plt.ylabel('Сума ($ млрд)')
         plt.xticks(rotation=45, ha='right')
-        plt.legend(title='Тип')
         plt.tight_layout()
         plt.savefig(os.path.join(output_dir, "barplot_commitments_allocations.png"))
         plt.show()
