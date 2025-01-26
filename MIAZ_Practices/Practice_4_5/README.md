@@ -8,7 +8,7 @@
 - Використання Python для обробки даних, побудови моделі класифікації та оцінки її ефективності.
 - Застосування реального набору даних з Kaggle.
 
-**Датасет:** [Student Performance Data Set](https://archive.ics.uci.edu/ml/datasets/Student+Performance) з репозиторію UCI Machine Learning Repository.
+**Датасет:** `student-mat.csv` з папки `DataSet`.
 
 ## Використаний підхід:
 
