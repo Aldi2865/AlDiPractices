@@ -13,13 +13,13 @@ SELECT unit_name, unit_location FROM Units WHERE unit_location = 'Локація
 SELECT * FROM Operations WHERE operation_status = 'Завершено';
 
 -- 5. Вибрати назви операцій, що почалися після 01.01.2023.
-SELECT operation_name FROM Operations WHERE start_date > '2023-01-01';
+SELECT operation_name FROM Operations WHERE start_date > '2024-01-01';
 
 -- 6. Вибрати звіти, створені в червні 2023 року.
-SELECT * FROM Reports WHERE report_date BETWEEN '2023-06-01' AND '2023-06-30';
+SELECT * FROM Reports WHERE report_date BETWEEN '2024-06-01' AND '2025-06-30';
 
 -- 7. Вибрати описи звітів, що відносяться до операції з operation_id 10.
-SELECT description FROM Reports WHERE operation_id = 10;
+SELECT description FROM Reports WHERE operation_id = 9;
 
 -- 8. Вибрати unit_id підрозділів, назва яких починається з 'Підрозділ 1'.
 SELECT unit_id FROM Units WHERE unit_name LIKE 'Підрозділ 1%';
