@@ -1,6 +1,6 @@
 import tensorflow as tf
-from tensorflow.keras.layers import Dense  # Імпортуємо повнозв'язний шар
-from tensorflow.keras.models import Sequential # Імпортуємо послідовну модель
+from tensorflow.keras.layers import Dense  # type: ignore # Імпортуємо повнозв'язний шар
+from tensorflow.keras.models import Sequential # type: ignore # Імпортуємо послідовну модель
 from sklearn.datasets import make_classification
 from sklearn.model_selection import train_test_split
 

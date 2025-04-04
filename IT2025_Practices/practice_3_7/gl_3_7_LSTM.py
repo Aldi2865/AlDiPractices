@@ -1,6 +1,6 @@
 import tensorflow as tf
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import LSTM, Dense
+from tensorflow.keras.models import Sequential # type: ignore
+from tensorflow.keras.layers import LSTM, Dense # type: ignore
 from sklearn.datasets import make_classification
 from sklearn.model_selection import train_test_split
 import numpy as np

@@ -2,15 +2,15 @@ import numpy as np
 import matplotlib.pyplot as plt
 import tensorflow as tf
 from tensorflow import keras
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense
+from tensorflow.keras.models import Sequential # type: ignore
+from tensorflow.keras.layers import Dense # type: ignore
 from sklearn.datasets import make_classification
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler # Додано для масштабування даних
-from tensorflow.keras.layers import LeakyReLU # Додано для використання LeakyReLU
-from tensorflow.keras.optimizers import Adam # Додано для використання Adam оптимізатора
-from tensorflow.keras.callbacks import EarlyStopping # Додано для ранньої зупинки навчання
-from tensorflow.keras.layers import BatchNormalization # Додано для нормалізації пакетів
+from tensorflow.keras.layers import LeakyReLU # type: ignore # Додано для використання LeakyReLU
+from tensorflow.keras.optimizers import Adam # type: ignore # Додано для використання Adam оптимізатора
+from tensorflow.keras.callbacks import EarlyStopping # type: ignore # Додано для ранньої зупинки навчання
+from tensorflow.keras.layers import BatchNormalization # type: ignore # Додано для нормалізації пакетів
 from sklearn.metrics import classification_report, confusion_matrix # Додано для оцінки моделі
 
 # --- 1. Налаштування та Генерація даних ---
