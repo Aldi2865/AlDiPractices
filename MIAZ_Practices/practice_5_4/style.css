@@ -1,0 +1,183 @@
+/* style.css */
+
+/* Базове скидання та box-sizing */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* Скидання відступів для основних елементів */
+body, h1, h2, h3, h4, h5, h6, p, ul, ol, li, figure, figcaption, blockquote, dl, dd {
+    margin: 0;
+}
+
+/* Забираємо стандартні стилі списків */
+ul[class],
+ol[class] {
+    list-style: none;
+    padding: 0; /* Забираємо внутрішній відступ */
+}
+
+/* Загальні стилі для body (Flexbox для sticky footer) */
+body {
+    font-family: Arial, Helvetica, sans-serif; /* Шрифт за замовчуванням */
+    height: 100vh; /* Змінено з min-height на height */
+    display: flex;
+    flex-direction: column;
+    background-color: aliceblue; /* Фон з вашого файлу */
+    color: royalblue; /* Основний колір тексту з вашого файлу */
+    line-height: 1.5; /* Базовий міжрядковий інтервал */
+    overflow: hidden; /* Забороняємо прокрутку на рівні body */
+}
+
+/* Стилі для хедера */
+header {
+    background-color: royalblue;
+    color: beige;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Дозволяє переносити елементи на малих екранах */
+    gap: 10px; /* Відстань між лого та навігацією при переносі */
+    flex-shrink: 0; /* Забороняємо хедеру зменшуватись */
+}
+
+.logo {
+    font-size: 2em; /* Трохи зменшив */
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 3px; /* Трохи зменшив */
+    color: #150c77;
+    text-align: left; /* Вирівнювання лого зліва */
+}
+
+/* Стилі для навігації */
+nav ul.nav-links {
+    display: flex;
+    flex-wrap: wrap; /* Дозволяє переносити пункти */
+    gap: 20px; /* Відстань між пунктами меню */
+    justify-content: center; /* Центрування пунктів при переносі */
+}
+
+/* Стилі для посилань в навігації */
+nav ul.nav-links a {
+    color: inherit; /* Успадковує колір від header (beige) */
+    text-decoration: none;
+    padding: 5px 0; /* Додає трохи простору для кліку */
+    transition: color 0.3s ease;
+    display: inline-block; /* Для правильного відображення padding */
+}
+
+nav ul.nav-links a:hover {
+    color: #cebf1b; /* Колір при наведенні з вашого файлу */
+}
+
+/* Стилі для основного контенту */
+main {
+    flex-grow: 1; /* Дозволяє main зайняти весь доступний простір */
+    padding: 20px;
+    display: flex; /* Вмикаємо Flexbox */
+    flex-direction: row; /* Розташовуємо елементи горизонтально */
+    gap: 20px; /* Відстань між блоками */
+    width: 100%; /* Займає всю ширину */
+    /* align-items: stretch; */ /* Прибираємо або змінюємо stretch */
+    align-items: flex-start; /* Вирівнюємо елементи по верху */
+    overflow-y: auto; /* Дозволяємо вертикальну прокрутку ТІЛЬКИ для main, якщо контент не вміщається */
+    overflow-x: hidden; /* Забороняємо горизонтальну прокрутку для main */
+}
+
+/* Загальні стилі для блоків контенту */
+.cards, .graph-canvas, #map {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    display: flex; /* Використовуємо flex для внутрішнього вирівнювання */
+    justify-content: center;
+    align-items: center;
+    font-style: italic;
+    color: #607d8b;
+    border: 1px solid #bbdefb;
+}
+
+/* Стилі для .cards та #map (фіксована або базова ширина) */
+.cards, #map {
+    flex: 0 0 200px; /* Не ростуть, не зменшуються, базова ширина 200px */
+    min-height: 150px; /* Мінімальна висота залишається */
+}
+
+/* Стилі для .graph-canvas (займає решту простору) */
+.graph-canvas {
+    flex: 1 1 auto; /* Дозволяємо рости (1) і зменшуватись (1), базова ширина auto */
+    min-height: 300px; /* Можна задати більшу мін. висоту для графіка */
+    /* Важливо: переконайтесь, що JS встановлює правильні width/height для canvas */
+    align-self: stretch; /* Дозволяємо канвасу розтягнутись по висоті main, якщо потрібно */
+}
+
+
+/* Стилі для футера */
+footer {
+    background-color: royalblue;
+    color: yellow; /* Колір з вашого файлу */
+    text-align: center;
+    padding: 15px 20px; /* Додав горизонтальний padding */
+    /* margin-top: auto; */ /* Більше не потрібен, оскільки body має фіксовану висоту */
+    width: 100%;
+    flex-shrink: 0; /* Забороняємо футеру зменшуватись */
+}
+
+footer p {
+    margin: 0;
+    font-size: 0.9em; /* Трохи збільшив */
+}
+
+/* Адаптивність (приклад) */
+@media (max-width: 768px) { /* Змінюємо точку перелому для горизонтального/вертикального layout */
+    main {
+        flex-direction: column; /* Повертаємо вертикальне розташування на менших екранах */
+        align-items: center; /* Центруємо елементи */
+        /* overflow-y: auto; залишається */
+    }
+    .cards, .graph-canvas, #map {
+        flex-basis: auto; /* Скидаємо базову ширину */
+        flex-grow: 0; /* Забороняємо рости вертикально */
+        width: 100%; /* Елементи займають всю ширину */
+        max-width: 600px; /* Обмеження ширини для кращого вигляду */
+    }
+    .graph-canvas {
+        align-self: center; /* Скасовуємо stretch на малих екранах */
+    }
+}
+
+
+@media (max-width: 600px) {
+    .logo {
+        font-size: 1.5em; /* Менший логотип на мобільних */
+        letter-spacing: 2px;
+        text-align: center; /* Центруємо лого на малих екранах */
+        width: 100%; /* Лого займає всю ширину */
+    }
+    header {
+        justify-content: center; /* Центруємо навігацію під лого */
+    }
+    nav ul.nav-links {
+       flex-direction: column; /* Меню стає вертикальним */
+       gap: 10px;
+       align-items: center;
+       width: 100%;
+    }
+    nav ul.nav-links li {
+        width: 100%;
+        text-align: center;
+    }
+    main {
+        padding: 15px;
+    }
+    .cards, .graph-canvas, #map {
+        padding: 15px;
+        max-width: 100%; /* На малих екранах можуть займати всю ширину */
+    }
+}
