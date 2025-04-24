@@ -15,9 +15,9 @@ my_list = [269, 270, 271, 272, 273]
 
 @app.get("/id")
 def get_ids():
-    return {"ids": my_list}
+    return {"ids": len(my_list)}
 
-@app.get("/id/{id}")
+@app.get("/ids/{id}")
 def get_user_by_id(id: int):
     if id < 0 or id >= len(my_list):
         return {"error": "Index out of range"}
